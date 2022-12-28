@@ -7,7 +7,7 @@
         <div><span data-bind="i18n: 'Assembly is charged per delivery. Cost at $30 per item, max charge $90 per delivery.'" /></div>
     </div>
     <div class="assembly-products">
-        <!-- ko if: productList().length -->
+        <!-- ko if: productList().length && statusAction() == 'selected' -->
         <div class="assembly-products_title">
             <strong><span data-bind="i18n: 'Items available for assembly'">Items available for assembly</span>:</strong>
         </div>
@@ -27,8 +27,20 @@
         </div>
         <!-- /ko -->
     </div>
+    <!-- ko if: statusAction() != 'before_select' -->
+    <div class="assembly-total">
+        <span data-bind="i18n: 'Assembly Totals'">Assembly Totals</span>:
+        <span data-bind="text: totalPrice()"></span>
+    </div>
+    <!-- /ko -->
     <div class="assembly-action">
-        buttons
+        <!-- ko if: statusAction() == 'before_select' -->
+        <button class="select" data-bind="i18n: 'Select', click: triggerAction.bind($data,'select')">Select</button>
+        <!-- /ko -->
+        <!-- ko if: statusAction() == 'selected' -->
+        <button class="save" data-bind="i18n: 'Save', click: triggerAction.bind($data,'save')">Save</button>
+        <button class="cancel" data-bind="i18n: 'Cancel', click: triggerAction.bind($data,'cancel')">Cancel</button>
+        <!-- /ko -->
     </div>
 </div>
 <!-- /ko -->
