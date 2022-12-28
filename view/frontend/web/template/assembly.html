@@ -4,10 +4,28 @@
         <strong><span data-bind="i18n: 'Assembly Service'">Assembly Service</span></strong>
     </div>
     <div class="assembly-cms-block">
-        <div>cms</div>
+        <div><span data-bind="i18n: 'Assembly is charged per delivery. Cost at $30 per item, max charge $90 per delivery.'" /></div>
     </div>
     <div class="assembly-products">
-        product list
+        <!-- ko if: productList().length -->
+        <div class="assembly-products_title">
+            <strong><span data-bind="i18n: 'Items available for assembly'">Items available for assembly</span>:</strong>
+        </div>
+        <div class="assembly-products_list">
+            <ul class="assembly-products" data-bind="foreach: productList">
+                <li>
+                    <input data-bind="checked: selected, attr: {id: 'product-' + id()}" type="checkbox">
+                    <label data-bind="attr: {for: 'product-' + id()}"></label>
+                    <img data-bind="attr: {src: image().src, alt: image().alt}" width="60" />
+                    <span data-bind="text: name"></span>
+                    <span>
+                        <span data-bind="i18n: 'Qty'">Qty</span>:
+                        <strong><span data-bind="text: qty"></span></strong>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <!-- /ko -->
     </div>
     <div class="assembly-action">
         buttons
